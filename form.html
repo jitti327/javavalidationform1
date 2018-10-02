@@ -14,6 +14,7 @@
   </style>
   <script type="text/javascript">
 
+  /*
   function validateName(name){
     console.log('Name called');
     console.log('Name value', name.value);
@@ -59,6 +60,94 @@
       errorElement.innerHTML = "";
     }
   }
+
+  */
+
+  /*
+   *
+   * Parameter : 
+   *  input   : Input field on which validation is to be called
+   *  errorId : ID of HTML element where we need to show the validation
+   *
+   * Return   : void
+   */
+  function validateRequired(input, errorId){
+    var errorElement = document.getElementById(errorId);
+    errorElement.innerHTML = "";
+    if(input.value === ""){
+      errorElement.innerHTML = "This field is required";
+    }    
+  }
+
+
+
+  /*
+   *
+   * Parameter : 
+   *  input     : Input field on which validation is to be called
+   *  errorId   : ID of HTML element where we need to show the validation
+   *  maxLength : Number of character allowed
+   *  type      : Allowed type is 'max' & 'min'
+   * Return   : void
+   */
+
+  function validateLength(input, errorId, length, type = 'max'){
+    var errorElement = document.getElementById(errorId);
+    errorElement.innerHTML = "";
+
+    if(type == "min"){
+      if(input.value.length < length){
+        errorElement.innerHTML = "Min character allowed are "+length;
+      }  
+    }else{
+      if(input.value.length > length){
+        errorElement.innerHTML = "Max character allowed are "+length;
+      }      
+    }
+
+  }
+
+
+  /*
+   *
+   * Parameter : 
+   *  input     : Input field on which validation is to be called
+   *  errorId   : ID of HTML element where we need to show the validation
+   *  maxLength : Number of character allowed
+   * Return   : void
+   */
+
+  function validateMaxLength(input, errorId, length){
+    // var errorElement = document.getElementById(errorId);
+    // errorElement.innerHTML = "";
+    // if(input.value.length > length){
+    //   errorElement.innerHTML = "Max character allowed are "+length;
+    // }   
+    validateLength(input, errorId, length, "max"); 
+  }
+
+
+
+  /*
+   *
+   * Parameter : 
+   *  input     : Input field on which validation is to be called
+   *  errorId   : ID of HTML element where we need to show the validation
+   *  maxLength : Number of character allowed
+   * Return   : void
+   */
+
+  function validateMinLength(input, errorId, length){
+    // var errorElement = document.getElementById(errorId);
+    // errorElement.innerHTML = "";
+    // if(input.value.length < length){
+    //   errorElement.innerHTML = "Min character allowed are "+length;
+    // }    
+    validateLength(input, errorId, length, "min"); 
+  }
+
+
+
   /*function validateMail(mail){
     console.log('Validate mail called');
     console.log('Mail value', mail.value );
@@ -106,37 +195,38 @@
       <div class="row">
       <div class="col-sm-6">
         <label><b>Name</b></label>
-        <input type="text" onkeydown="validateName(this)" onchange="validateName(this)" onblur="validateName(this)" id="input-field" name="name" placeholder="Enter Your Name Here..." value=""/>
+        <input type="text" onkeydown="validateMaxLength(this, 'name', 50);validateRequired(this, 'name');" onchange="validateRequired(this, 'name');" onblur="validateRequired(this, 'name');" id="input-field" name="name" placeholder="Enter Your Name Here..." value=""/>
         <span id="name"></span>
       </div>
       </div>
       <div class="row">
       <div class="col-sm-6">
         <label><b>Email</b></label>
-        <input type="text" onkeydown="validateEmail(this)" onchange="validateEmail(this)" onblur="validateEmail(this)"  id="email-field" name="email" placeholder="Enter Your Email Here..." value=""/>
+        <input type="text" onkeydown="validateRequired(this, 'email');" onchange="validateRequired(this, 'email');" onblur="validateRequired(this, 'email');"  id="email-field" name="email" placeholder="Enter Your Email Here..." value=""/>
         <span id="email"></span>
       </div>
       </div>
       <div class="row">
       <div class="col-sm-6">
         <label><b>Password</b></label>
-        <input type="text" onkeydown="validatePass(this)" onchange="validatePass(this)" onblur="validatePass(this)"  id="Pass-field" name="password" placeholder="********" value=""/>
+        <input type="text" onkeydown="validateRequired(this, 'pass');" onchange="validateRequired(this, 'pass');" onblur="validateRequired(this, 'pass');"  id="Pass-field" name="password" placeholder="********" value=""/>
         <span id="pass"></span>
       </div>
       </div>
       <div class="row">
       <div class="col-sm-6"> 
         <label><b>Confirm Password</b></label>
-        <input type="text"  onkeydown="validateCpass(this)" onchange="validateCpass(this)" onblur="validateCpass(this)"  id="cpass-field" name="cpassword" placeholder="********" value=""/>
+        <input type="text"  onkeydown="validateRequired(this, 'cpass');" onchange="validateRequired(this, 'cpass');" onblur="validateRequired(this, 'cpass');"  id="cpass-field" name="cpassword" placeholder="********" value=""/>
         <span id="cpass"></span>
       </div>
       </div>
       <div class="row">
       <div class="col-sm-6">
         <label><b>Gender</b></label>
-        <input type="radio" onkeydown="validateGen(this)" onblur="" ="" name="gender" value=""/>Male
+        <input type="radio" onkeydown="validateRequired(this, 'gender');" onblur="" ="" name="gender" value=""/>Male
         <input type="radio" name="gender" value=""/>Female
         <input type="radio" name="gender" value=""/>Others
+        <span id="gender"></span>
       </div>
       </div>
       <div class="row">
