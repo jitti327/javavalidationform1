@@ -156,6 +156,31 @@
   }
 
 
+
+  /*
+   *
+   * Parameter : 
+   *  value    : Input string+
+   * 
+   *  Return   : boolean
+   *    true  : If it has a single special character
+   *    false : If it has no special character
+   */
+  function findSpecialCharacterWithCustomMatching(value){
+
+    var specialCharacters = "~!@#$%^&*()_+{}:|<>?";
+    for(var i= 0 ; i < value.length; i++){
+
+      if(specialCharacters.indexOf(value[i]) !== -1){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+
+
   function findUpperCaseWithHelperFunction(value){
 
     if( value.toLowerCase() == value ){
@@ -171,6 +196,7 @@
     var errorElement = document.getElementById(errorId);
     errorElement.innerHTML = "";
     
+    console.log('input', input.value);
     if(input.value === ""){
       errorElement.innerHTML = "This field is required";
       return;
@@ -192,6 +218,11 @@
       return;
     }
 
+
+    if(findSpecialCharacterWithCustomMatching(input.value) === false){
+      errorElement.innerHTML = "Atleast one special character";
+      return;
+    }
 
 
 
@@ -270,7 +301,7 @@
       <div class="col-sm-6">
         <label><b>Password</b></label>
         <input type="text" 
-          onkeydown="passwordValidation(this, 'pass');" 
+          onkeyup="passwordValidation(this, 'pass');" 
           onchange="passwordValidation(this, 'pass');" 
           onblur="passwordValidation(this, 'pass'); " 
           id="Pass-field" 
