@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form validation</title>
+    <style>
+      body{
+        background-color: #ffe6e6;
+        text-align: center;
+        padding-top: 60px;
+        }
+        .f1{
+          line-height: 30px;
+        }
+    </style>
+    <script type="text/javascript">
+
+    function validateName(name){
+      console.log('Validate name called');
+      console.log('Name value', name.value );
+
+      var errorElement = document.getElementById('validation-name');
+      if(name.value === ""){
+         errorElement.innerHTML = "This field is required";
+      }else{
+        errorElement.innerHTML = "";
+      }
+    }
+    function validateMail(mail){
+      console.log('Validate mail called');
+      console.log('Mail value', mail.value );
+
+      var errorElement = document.getElementById('validation-mail');
+      if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail.value)){
+         errorElement.innerHTML = "Invalid Email";
+      }
+      else{
+        errorElement.innerHTML = "This field is required";
+      }
+
+    }
+
+    function validatePass(pass){
+      console.log('Validate pass called');
+      console.log('Pass value', pass.value );
+
+      var errorElement = document.getElementById('validation-pass');
+      if(pass.value === ""){
+         errorElement.innerHTML = "This field is required(Password Should be 8-15 character and atleast one uppecase and one special character)";
+      }else{
+        errorElement.innerHTML = "";
+      }
+    }
+
+    function validateCpass(cpass){
+      console.log('Validate cpass called');
+      console.log('Cpass value', cpass.value );
+
+      var errorElement = document.getElementById('validation-cpass');
+      if(cpass.value === ""){
+         errorElement.innerHTML = "Password Not Matched";
+      }else{
+        errorElement.innerHTML = "";
+      }
+    }
+
+  </script>
+  </head>
+    <body>
+      <div class="row">
+        <div class="sm-col-12">
+      <form class="f1" action="" method="POST">
+        <div class="row">
+          <div class="col-sm-6">
+            <label><b>Name</b></label>
+            <input type="text" onchange="validateName(this)" id="input-field" name="name" placeholder="Enter Your Name Here..." value=""/>
+            <span id="validation-name"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <label><b>Email</b></label>
+            <input type="text" onchange="validateMail(this)" id="input-field" name="email" placeholder="Enter Your Email Here..." value=""/>
+            <span id="validation-mail"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <label><b>Password</b></label>
+            <input type="text" onchange="validatePass(this)" id="input-field" name="password" placeholder="********" value=""/>
+            <span id="validation-pass"></span>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-sm-6"> 
+            <label><b>Confirm Password</b></label>
+            <input type="text" onchange="validateCpass(this)" id="input-field" name="cpassword" placeholder="********" value=""/>
+            <span id="validation-cpass"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+          <label><b>Gender</b></label>
+            <input type="radio" name="gender" value=""/>Male
+        <input type="radio" name="gender" value=""/>Female
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <label><b>Qualification</b></label>
+        <select>
+          <option>Select</option>
+          <option>10th</option>
+          <option>12th</option>
+          <option>Bachelor</option>
+          <option>Master</option>
+          <option>Phd</option>
+        </select>
+          </div>
+        </div>
+        <input type="Submit" name="Signup" value="Signup"/>&nbsp&nbsp<a href="Login.php">Login</a>
+      </form>
+    </div>
+    </div>
+    </body>
+  </html>
