@@ -88,14 +88,18 @@
    *  errorId   : ID of HTML element where we need to show the validation
    *  maxLength : Number of character allowed
    *  type      : Allowed type is 'max' & 'min'
-   * Return   : void
+   * 
+   *  Return   : void
    */
 
   function validateLength(input, errorId, length, type = 'max'){
     var errorElement = document.getElementById(errorId);
     errorElement.innerHTML = "";
 
+    //console.log(input, errorId, length, type);
+
     if(type == "min"){
+      console.log('current length', input.value.length, length);
       if(input.value.length < length){
         errorElement.innerHTML = "Min character allowed are "+length;
       }  
@@ -108,45 +112,101 @@
   }
 
 
-  /*
-   *
-   * Parameter : 
-   *  input     : Input field on which validation is to be called
-   *  errorId   : ID of HTML element where we need to show the validation
-   *  maxLength : Number of character allowed
-   * Return   : void
-   */
-
-  function validateMaxLength(input, errorId, length){
-    // var errorElement = document.getElementById(errorId);
-    // errorElement.innerHTML = "";
-    // if(input.value.length > length){
-    //   errorElement.innerHTML = "Max character allowed are "+length;
-    // }   
-    validateLength(input, errorId, length, "max"); 
-  }
-
-
 
   /*
    *
    * Parameter : 
-   *  input     : Input field on which validation is to be called
-   *  errorId   : ID of HTML element where we need to show the validation
-   *  maxLength : Number of character allowed
-   * Return   : void
+   *  value    : Input string+
+   * 
+   *  Return   : boolean
+   *    true  : If it has a single uppercase character
+   *    false : If it has no uppercase character
    */
+  function findUpperCaseWithCustomMatching(value){
 
-  function validateMinLength(input, errorId, length){
-    // var errorElement = document.getElementById(errorId);
-    // errorElement.innerHTML = "";
-    // if(input.value.length < length){
-    //   errorElement.innerHTML = "Min character allowed are "+length;
-    // }    
-    validateLength(input, errorId, length, "min"); 
+    var upperCaseArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+    //var testString = "ncow uper case A";
+    var testString = value;
+    var counter = 0;
+    var flag = false;
+
+    for(var i= 0 ; i < testString.length; i++){
+      // console.log(i, testString[i]);
+
+      for(var y=0; y < upperCaseArray.length; y++){
+        
+        //console.log(i, y, testString[i], upperCaseArray[y]);
+        if(testString[i] == upperCaseArray[y] ){
+          console.log('we found one upper case i.e' , upperCaseArray[y] );
+          flag = true;
+          break;
+        }
+        counter++;
+      }
+
+      if(flag == true){
+        break;
+      }
+    }
+
+
+    return flag;
+
   }
 
 
+  function findUpperCaseWithHelperFunction(value){
+
+    if( value.toLowerCase() == value ){
+      return false;
+    }
+    return true;
+
+  }
+
+
+  function passwordValidation(input, errorId){
+
+    var errorElement = document.getElementById(errorId);
+    errorElement.innerHTML = "";
+    
+    if(input.value === ""){
+      errorElement.innerHTML = "This field is required";
+      return;
+    }    
+
+
+    if(input.value.length < 8){
+      errorElement.innerHTML = "Min character allowed are 8";
+      return;
+    }  
+
+    if(input.value.length > 15){
+      errorElement.innerHTML = "Max character allowed are 15";
+      return;
+    }  
+
+    if(findUpperCaseWithHelperFunction(input.value) === false){
+      errorElement.innerHTML = "At least one Uppercase letter";
+      return;
+    }
+
+
+
+
+
+    
+    // if(input.value === ""){
+    //   errorElement.innerHTML = "This field is required";
+    // }else if(input.value.length < 8){
+    //   errorElement.innerHTML = "Min character allowed are 8";
+    // }else if(input.value.length > 15){
+    //   errorElement.innerHTML = "Max character allowed are 15";
+    // }  
+
+
+  }
 
   /*function validateMail(mail){
     console.log('Validate mail called');
@@ -195,7 +255,7 @@
       <div class="row">
       <div class="col-sm-6">
         <label><b>Name</b></label>
-        <input type="text" onkeydown="validateMaxLength(this, 'name', 50);validateRequired(this, 'name');" onchange="validateRequired(this, 'name');" onblur="validateRequired(this, 'name');" id="input-field" name="name" placeholder="Enter Your Name Here..." value=""/>
+        <input type="text" onkeydown="validateLength(this, 'name', 50,'max');validateRequired(this, 'name');" onchange="validateRequired(this, 'name');" onblur="validateRequired(this, 'name');" id="input-field" name="name" placeholder="Enter Your Name Here..." value=""/>
         <span id="name"></span>
       </div>
       </div>
@@ -209,7 +269,14 @@
       <div class="row">
       <div class="col-sm-6">
         <label><b>Password</b></label>
-        <input type="text" onkeydown="validateRequired(this, 'pass');" onchange="validateRequired(this, 'pass');" onblur="validateRequired(this, 'pass');"  id="Pass-field" name="password" placeholder="********" value=""/>
+        <input type="text" 
+          onkeydown="passwordValidation(this, 'pass');" 
+          onchange="passwordValidation(this, 'pass');" 
+          onblur="passwordValidation(this, 'pass'); " 
+          id="Pass-field" 
+          name="password" 
+          placeholder="********" 
+          value=""/>
         <span id="pass"></span>
       </div>
       </div>
