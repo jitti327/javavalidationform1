@@ -173,21 +173,7 @@
 
 
 
-  /*
-  *
-  * Emial Validation
-  *
-  */
-function checkEmail(email){
-    var specialCharacter ="@.";
-  email.value = "gjjh";
-  for(i=0; i < email.length; i++){
-    if(email.value.indexof(i)==specialCharacter){
-        console.log('Please enter the first character word');
-    }
-    
-  }
-}
+
 
 
   </script>
