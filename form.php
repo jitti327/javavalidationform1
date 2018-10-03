@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Form2</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
   <script type="text/javascript">
   /*
    *
