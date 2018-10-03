@@ -280,6 +280,31 @@
     }
   }*/
 
+
+  /*
+  *
+  * Emial Validation
+  *
+  */
+function checkEmail(email){
+    var specialCharacter ="@.";
+    var length = email.value.length;
+ 
+console.log(length.indexOf);
+
+    console.log(email.value.length);
+  for(i=0; i < email.length; i++){
+    console.log(email.value.indexof(i));
+    if(email.value.indexof(i)==specialCharacter){
+        console.log('Please enter the first character word');
+    }
+    
+  }
+}
+
+
+
+
   </script>
   </head>
   <body>
@@ -296,7 +321,8 @@
       <div class="row">
       <div class="col-sm-6">
         <label><b>Email</b></label>
-        <input type="text" onkeydown="validateRequired(this, 'email');" onchange="validateRequired(this, 'email');" onblur="validateRequired(this, 'email');"  id="email-field" name="email" placeholder="Enter Your Email Here..." value=""/>
+        <input type="text" 
+        onkeyup="checkEmail(this);" onchange="//validateRequired(this, 'email');" onblur="//validateRequired(this, 'email');"  id="email-field" name="email" placeholder="Enter Your Email Here..." value=""/>
         <span id="email"></span>
       </div>
       </div>

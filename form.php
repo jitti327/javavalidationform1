@@ -1,8 +1,12 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Form2</title>
     <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.min.js">
+    <link rel="stylesheet" href="jquery.min.js">
   <script type="text/javascript">
   /*
    *
@@ -166,35 +170,60 @@
       return;
     }
   }
+
+
+
+  /*
+  *
+  * Emial Validation
+  *
+  */
+function checkEmail(email){
+    var specialCharacter ="@.";
+  email.value = "gjjh";
+  for(i=0; i < email.length; i++){
+    if(email.value.indexof(i)==specialCharacter){
+        console.log('Please enter the first character word');
+    }
+    
+  }
+}
+
+
   </script>
 </head>
 <body>
-  <div class="container">
-  <div class="row">
-  <form class="f1" action="" method="POST">
-   <h1>Create Your Account</h1>
-    <div class="form-group">
+  <div class="container"><!--container start-->
+  <div class="row"><!--Row start-->
+  <form class="f1" action="" method="POST"><!--form start-->
+   <h1 class="heading">Create Your Account</h1>
+    <div class="form-group"><!--for name-->
     <div class="row">
     <div class="col-sm-9">
-      <label><b>Name</b></label>
+      <label class="name"><b>Name</b></label>
       <input type="text" onkeydown="validateLength(this, 'name', 50,'max');validateRequired(this, 'name');" onchange="validateRequired(this, 'name');" onblur="validateRequired(this, 'name');" id="input-field" name="name" placeholder="Enter Your Name Here..." value=""/>
       <span id="name"></span>
     </div>
     </div>
     </div>
-    <div class="form-group">
+    <div class="form-group"><!--for email-->
     <div class="row">
-    <div class="col-sm-6">
-      <label><b>Email</b></label>
-      <input type="text" onkeydown="validateRequired(this, 'email');" onchange="validateRequired(this, 'email');" onblur="validateRequired(this, 'email');"  id="email-field" name="email" placeholder="Enter Your Email Here..." value=""/>
+    <div class="col-sm-9">
+      <label class="email"><b>Email</b></label>
+      <input type="text" 
+        onkeydown="//validateRequired(this, 'email');" 
+        onchange="//validateRequired(this, 'email');" 
+        onblur="//validateRequired(this, 'email');"  
+        onkeyup="checkEmail(this)" 
+        id="email-field" name="email" placeholder="Enter Your Email Here..." value=""/>
       <span id="email"></span>
     </div>
     </div>
     </div>
-    <div class="form-group">
+    <div class="form-group"><!--for Pass-->
     <div class="row">
-    <div class="col-sm-6">
-      <label><b>Password</b></label>
+    <div class="col-sm-9">
+      <label class="pass"><b>Password</b></label>
       <input type="text" 
       onkeyup="passwordValidation(this, 'pass');"
       onchange="passwordValidation(this, 'pass');"
@@ -207,19 +236,31 @@
     </div>
     </div>
     </div>
-    <div class="form-group">
+    <div class="form-group"><!--for ConPass-->
     <div class="row">
-    <div class="col-sm-6"> 
-      <label><b>Confirm Password</b></label>
+    <div class="col-sm-9"> 
+      <label class="cpass"><b>Confirm Password</b></label>
       <input type="text"  onkeydown="validateRequired(this, 'cpass');" onchange="validateRequired(this, 'cpass');" onblur="validateRequired(this, 'cpass');"  id="cpass-field" name="cpassword" placeholder="********" value=""/>
       <span id="cpass"></span>
     </div>
     </div>
     </div>
-    <div class="form-group">
+    <div class="form-group"><!--for gender-->
     <div class="row">
-    <div class="col-sm-6">
-      <label><b>Gender</b></label>
+    <div class="col-sm-9">
+             <label class="gender">Gender:</label>
+    </div>
+       
+    <div class="col-xs-4 male">   
+             <input type="radio" name="gender"  id="gender" value="boy">Male</input>
+    </div>
+         
+    <div class="col-xs-4 female">
+      <input type="radio"  name="gender" id="gender" value="girl" >Female</input>
+    </div>
+      
+         </div>
+      <label class="gender"><b>Gender</b></label>
       <input type="radio" onkeydown="validateRequired(this, 'gender');" onblur="" ="" name="gender" value=""/>Male
       <input type="radio" name="gender" value=""/>Female
       <input type="radio" name="gender" value=""/>Others
@@ -227,10 +268,10 @@
     </div>
     </div>
     </div>
-    <div class="form-group">
+    <div class="form-group"><!--for qualification-->
     <div class="row">
-    <div class="col-sm-6">
-      <label><b>Qualification</b></label>
+    <div class="col-sm-9">
+      <label class="quali"><b>Qualification</b></label>
       <select>
         <option>Select</option>
         <option>10th</option>
