@@ -232,9 +232,6 @@
       return;
     }
 
-
-
-
     
     // if(input.value === ""){
     //   errorElement.innerHTML = "This field is required";
@@ -244,7 +241,19 @@
     //   errorElement.innerHTML = "Max character allowed are 15";
     // }  
 
+  }
 
+  /*
+  * Confirm password validation
+  * Matching Password and confirm password
+  */
+  function conpass(input ,errorId){
+    var errorElement = document.getElementById(errorId);
+    var pass = document.getElementById(pass);
+    if(input.value!= pass)
+    {
+      errorElement.innerHTML = "Password not match";
+    }
   }
 
   /*function validateMail(mail){
@@ -298,7 +307,7 @@
   *charachter are not allowed
   */
   function mobile(input, errorId){
-    var num = "0,1,2,3,4,5,6,7,8,9";
+
     var errorElement = document.getElementById(errorId);
     errorElement.innerHTML = "";
     
@@ -306,28 +315,18 @@
     if(input.value === ""){
       errorElement.innerHTML = "This field is required";
       return;
-    }     
-    for(var i= 0 ; i < value.length; i++){
-
-      if(specialCharacters.indexOf(value[i]) !== -1){
-        return true;
-      }
-    }
-
-    return false;
-  }
-   
+    }    
 
     if(input.value.length < 10){
-      errorElement.innerHTML = "Min Number allowed are 10";
+      errorElement.innerHTML = "At least 10 numbers to be field";
       return;
     }  
 
     if(input.value.length > 10){
-      errorElement.innerHTML = "Max Number allowed are 10";
+      errorElement.innerHTML = "Max numbers allowed are 10";
       return;
-    }  
-  }
+    }
+  } 
 
   </script>
   </head>
@@ -378,7 +377,7 @@
       <div class="row">
       <div class="col-sm-6"> 
         <label><b>Confirm Password</b></label>
-        <input type="text"  onkeyup="validateRequired(this, 'cpass');" onchange="validateRequired(this, 'cpass');" onblur="validateRequired(this, 'cpass');"  id="cpass-field" name="cpassword" placeholder="********" value=""/>
+        <input type="text"  onkeyup="validateRequired(this, 'cpass');conpass(this, 'cpass');" onchange="validateRequired(this, 'cpass');" onblur="validateRequired(this, 'cpass');"  id="cpass-field" name="cpassword" placeholder="********" value=""/>
         <span id="cpass"></span>
       </div>
       </div>
