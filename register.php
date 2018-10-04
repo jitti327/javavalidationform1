@@ -72,10 +72,22 @@
   function validateRequired(input, errorId){
     var errorElement = document.getElementById(errorId);
     errorElement.innerHTML = "";
+    
     if(input.value === ""){
       errorElement.innerHTML = "This field is required";
+      return;
     }    
-  }
+
+    if(input.value.length < 8){
+      errorElement.innerHTML = "Min character allowed are 8";
+      return;
+    }  
+
+    if(input.value.length > 15){
+      errorElement.innerHTML = "Max character allowed are 15";
+      return;
+    }
+  }  
 
 
   /*
@@ -129,11 +141,13 @@
       console.log('current length', input.value.length, length);
       if(input.value.length < length){
         errorElement.innerHTML = "Min character allowed are "+length;
+        return;
       }  
     }else{
       if(input.value.length > length){
         console.log("Max character allowed are "+length);
         errorElement.innerHTML = "Max character allowed are "+length;
+        return;
       }      
     }
 
@@ -445,7 +459,7 @@
       text-align: center;
       overflow: none;
       padding-top: 30px;
-      padding-left: 170px;
+      padding-left: 150px;
     }
   </style>
 </head>
@@ -454,11 +468,10 @@
 	<div class="row">
     <form class="f1" action="" method="POST">
       <div class="form-group">
-      <div class="row">
       <div class="col-sm-6">
         <label><b>Name</b></label>
         <input type="text" 
-        onkeyup="validateLength(this, 'name', 10,'max');validateRequired(this, 'name');" 
+        onkeyup="validateRequired(this, 'name');" 
         onchange="validateRequired(this, 'name');" 
         onblur="validateRequired(this, 'name');" 
         id="input-field" name="name" 
@@ -466,10 +479,8 @@
         value=""/>
         <span id="name"></span>
       </div>
-    	</div>
       </div>
       <div class="form-group">
-      <div class="row">
       <div class="col-sm-6">
         <label><b>Email</b></label>
         <input type="text" 
@@ -481,10 +492,8 @@
         value=""/>
         <span id="email"></span>
       </div>
-      </div>
     	</div>
       <div class="form-group">
-      <div class="row">
       <div class="col-sm-6">
         <label><b>Password</b></label>
         <input type="text" 
@@ -497,10 +506,8 @@
           value=""/>
         <span id="pass"></span>
       </div>
-      </div>
     	</div>
       <div class="form-group">
-      <div class="row">
       <div class="col-sm-6"> 
         <label><b>Confirm Password</b></label>
         <input type="text"  
@@ -512,9 +519,7 @@
         <span id="cpass"></span>
       </div>
       </div>
-      </div>
       <div class="form-group">
-      <div class="row">
       <div class="col-sm-6"> 
         <label><b>Phone Number:</b></label>
         <input type="text"  onkeyup="mobile(this, 'mob');" 
@@ -526,9 +531,7 @@
         <span id="mob"></span>
       </div>
       </div>
-      </div>
       <div class="form-group">
-      <div class="row">
       <div class="col-sm-6">
         <label><b>Gender</b></label>
         <input 
@@ -555,9 +558,7 @@
         <span id="gender"></span>
       </div>
       </div>
-      </div>
       <div class="form-group">
-      <div class="row">
       <div class="col-sm-6">
         <label><b>Qualification</b></label>
         <select
@@ -574,15 +575,12 @@
         </select>
         <span id="qualification-error"></span>
       </div>
-      </div>
     	</div>
       <div class="form-group">
-      <div class="row">
       <div class="col-sm-6">
         <input type="Submit" name="Signup" value="Signup"/>&nbsp&nbsp<a href="Login.php">Login</a>
     	</div>
     	</div>
-  		</div>
   	</form>
     </div>
     </div>

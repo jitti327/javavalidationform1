@@ -80,6 +80,7 @@
     errorElement.innerHTML = "";
     if(input.value === ""){
       errorElement.innerHTML = "This field is required";
+      return;
     }    
   }
 
@@ -135,11 +136,13 @@
       console.log('current length', input.value.length, length);
       if(input.value.length < length){
         errorElement.innerHTML = "Min character allowed are "+length;
+        return;
       }  
     }else{
       if(input.value.length > length){
         console.log("Max character allowed are "+length);
         errorElement.innerHTML = "Max character allowed are "+length;
+        return;
       }      
     }
 
@@ -340,15 +343,7 @@
       errorElement.innerHTML = "";
     }
   }*/
-
-  function Mail(mail){
-    //var mailformat ="/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/";
-    // if(mai.value !== "mail-format"){
-    //   errorElement.innerHTML = "Invaild Email";
-    //   return false;
-    // }
-  }
-
+ 
 
   /*
    *
@@ -432,7 +427,78 @@
       return;
     }  
   }
+   /*
+   *
+   * Function name :  email
+   * Parmater      : value ( string )
+   * return        : boolean
+    -- True  -- In case first letter is not "@","."
+    -- False -- In case first letter is "@","."
+  */
+  function email(value){
+
+    var allowedCharacter = ["@","."];
+    
+    // Both "@" && "." are present
+    if(value.indexOf(".") == -1 || value.indexOf("@") == -1){
+      console.log('we are in this condition');
+      return false;
+    }
+
+    // for(var i= 0; i< value.length; i++){
+    //   if(allowedCharacter.indexOf(value.[i]) == -1){
+    //     return false;
+    //   }
+    // }
+
+
+    // First character is not "@","."
+    if(allowedCharacter.indexOf(value[0]) !== -1 ){
+      return false;
+    }
+
+
+    // Last character is not "@","."
+    // console.log(value, value.length -1 , value[ value.length -1 ]);
+    if(allowedCharacter.indexOf(value[ value.length -1 ]) !== -1){
+      return false;
+    }
+
+
+    // "." is followed by "@"
+
+   if(value.indexOf("@") > value.indexOf(".")){
+      return false;
+  }
+
+
+    // "." is not immediately followed by "@"
+    // if(indexOf("."))
+    return true;
+
+  }
   
+    //var mailformat ="/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/";
+    // if(mai.value !== "mail-format"){
+    //   errorElement.innerHTML = "Invaild Email";
+    //   return false;
+    // }
+  //}
+
+   function Mail(input, errorId){
+
+    var errorElement = document.getElementById(errorId);
+    errorElement.innerHTML = "";
+    
+    if(input.value === ""){
+      errorElement.innerHTML = "This field is required";
+      return;
+    } 
+    if(email(input.value) === false){
+      errorElement.innerHTML = "Invaild email";
+      return;
+    }
+  }   
   </script>
   </head>
   <body>
@@ -456,7 +522,7 @@
       <div class="col-sm-6">
         <label><b>Email</b></label>
         <input type="text" 
-        onkeyup="Mail('this');validateRequired(this, 'email');" 
+        onkeyup="Mail(this, 'email')" 
         onchange="validateRequired(this, 'email');" 
         onblur="validateRequired(this, 'email');"  
         id="email-field" name="email" 
