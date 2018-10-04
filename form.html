@@ -204,7 +204,6 @@
     var errorElement = document.getElementById(errorId);
     errorElement.innerHTML = "";
     
-    console.log('input', input.value);
     if(input.value === ""){
       errorElement.innerHTML = "This field is required";
       return;
@@ -300,6 +299,24 @@
     //   return false;
     // }
   }
+
+  /*
+  * validation for number
+  */
+
+  function number(value){
+    var numbers = "0123456789";
+    for(var i= 0 ; i < value.length; i++){
+
+      if(numbers.indexOf(value[i]) !== -1){
+        return true;
+      }
+    }
+
+    return false;
+  }
+  
+
   /*
   * Mobile validation
   * Required
@@ -311,23 +328,28 @@
     var errorElement = document.getElementById(errorId);
     errorElement.innerHTML = "";
     
-    console.log('input', input.value);
     if(input.value === ""){
       errorElement.innerHTML = "This field is required";
       return;
     }    
 
+
+    if(number(input.value) === false){
+      errorElement.innerHTML = "Only numbers are allowed";
+      return;
+    }
+
     if(input.value.length < 10){
-      errorElement.innerHTML = "At least 10 numbers to be field";
+      errorElement.innerHTML = "Min Numbers allowed are 10";
       return;
     }  
 
     if(input.value.length > 10){
-      errorElement.innerHTML = "Max numbers allowed are 10";
+      errorElement.innerHTML = "Max Numbers allowed are 10";
       return;
-    }
-  } 
-
+    }  
+  }
+  
   </script>
   </head>
   <body>
@@ -377,21 +399,33 @@
       <div class="row">
       <div class="col-sm-6"> 
         <label><b>Confirm Password</b></label>
-        <input type="text"  onkeyup="validateRequired(this, 'cpass');conpass(this, 'cpass');" onchange="validateRequired(this, 'cpass');" onblur="validateRequired(this, 'cpass');"  id="cpass-field" name="cpassword" placeholder="********" value=""/>
+        <input type="text"  
+        onkeyup="validateRequired(this, 'cpass');conpass(this, 'cpass');" 
+        onchange="validateRequired(this, 'cpass');" 
+        onblur="validateRequired(this, 'cpass');"  
+        id="cpass-field" name="cpassword" 
+        placeholder="********" value=""/>
         <span id="cpass"></span>
       </div>
       </div>
       <div class="row">
       <div class="col-sm-6"> 
         <label><b>Phone Number:</b></label>
-        <input type="text"  onkeyup="mobile(this, 'mob');" onchange="validateRequired(this, 'mob');" onblur="validateRequired(this, 'mob');"  id="mob-field" name="mob" placeholder="Enter Your Mobile number" value=""/>
+        <input type="text"  onkeyup="mobile(this, 'mob');" 
+        onchange="validateRequired(this, 'mob');" 
+        onblur="validateRequired(this, 'mob');"  
+        id="mob-field" name="mob" 
+        placeholder="Enter Your Mobile number" 
+        value=""/>
         <span id="mob"></span>
       </div>
       </div>
       <div class="row">
       <div class="col-sm-6">
         <label><b>Gender</b></label>
-        <input type="radio" onkeyup="validateRequired(this, 'gender');" onblur="" ="" name="gender" value=""/>Male
+        <input type="radio" 
+        onkeyup="validateRequired(this, 'gender');" 
+        onblur="" ="" name="gender" value=""/>Male
         <input type="radio" name="gender" value=""/>Female
         <input type="radio" name="gender" value=""/>Others
         <span id="gender"></span>
