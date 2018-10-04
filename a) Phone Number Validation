@@ -1,0 +1,22 @@
+a) Phone Number Validation
+  -- Implemented
+
+
+b) Confirm password
+  -- Implemented 
+
+c) Required validation checkbox, radio and select.
+  Selected - Implemented 
+  Radio    - Implemented ( same is for checkbox also )
+
+  TODO : I have to teach you a better approach via name.
+
+d) Email validation
+ -- check for "@" and "."
+
+
+ https://jqueryvalidation.org/files/demo/
+
+ https://formvalidation.io
+
+ https://formvalidation.io/guide/plugins/bootstrap3/
