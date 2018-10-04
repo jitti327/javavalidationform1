@@ -1,13 +1,72 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Form2</title>
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="bootstrap.min.js">
-    <link rel="stylesheet" href="jquery.min.js">
+  <head>
+  <title>Form validation</title>
+  <style>
+    body{
+      background-color: #ffe6e6;
+      text-align: center;
+      padding-top: 60px;
+    }
+    .f1{
+      line-height: 30px;
+    }
+  </style>
   <script type="text/javascript">
+
+  // This variable is set to true when confirm password is touched/ changed.
+
+  var cPasswordTouched = false; // Flag
+
+  /*
+  function validateName(name){
+    console.log('Name called');
+    console.log('Name value', name.value);
+
+    var errorElement = document.getElementById('name');
+    if(name.value === ""){
+       errorElement.innerHTML = "This field is required";
+    }
+    else{
+      errorElement.innerHTML = "";
+    }
+  }
+  function validateEmail(email){
+    console.log('Email called');
+    console.log('Email value', email.value);
+    var errorElement = document.getElementById('email');
+    if(email.value ===""){
+      errorElement.innerHTML = "This field is required";
+    }
+    else{
+      errorElement.innerHTML = "";
+    }
+  }
+  function validatePass(pass){
+    console.log('Password called');
+    console.log('Pass value', pass.value);
+    var errorElement = document.getElementById('pass');
+    if(pass.value ===""){
+      errorElement.innerHTML = "This field is required";
+    }
+    else{
+      errorElement.innerHTML = "";
+    }
+  }
+  function validateCpass(cpass){
+    console.log('Confirm Password called');
+    console.log('Cpass value', cpass.value);
+    var errorElement = document.getElementById('cpass');
+    if(cpass.value ===""){
+      errorElement.innerHTML = "This field is required";
+    }
+    else{
+      errorElement.innerHTML = "";
+    }
+  }
+
+  */
+
   /*
    *
    * Parameter : 
@@ -21,10 +80,39 @@
     errorElement.innerHTML = "";
     if(input.value === ""){
       errorElement.innerHTML = "This field is required";
-    }
+    }    
   }
 
 
+  /*
+   *
+   * Parameter : 
+   *  input   : Radio button on which validation is to be called
+   *  errorId : ID of HTML element where we need to show the validation
+   *
+   * Return   : void
+   */
+  function validateRadioOldRequired(input, errorId){
+
+
+    var errorElement = document.getElementById(errorId);
+    //var fieldInput   = ["input-first", "input-second", "input-third"];
+    errorElement.innerHTML = "";
+    var firstChecked  = document.getElementById("input-first").checked;
+    var secondChecked = document.getElementById("input-second").checked;
+    var thirdChecked  = document.getElementById("input-third").checked;
+
+    if( firstChecked == true || secondChecked == true || thirdChecked == true ){
+      return;
+    }
+    
+    errorElement.innerHTML = "This field is required";
+
+  }
+
+  // function validateRadioRequired(input, errorId){
+
+  // }
 
   /*
    *
@@ -47,11 +135,12 @@
       console.log('current length', input.value.length, length);
       if(input.value.length < length){
         errorElement.innerHTML = "Min character allowed are "+length;
-      }
+      }  
     }else{
       if(input.value.length > length){
+        console.log("Max character allowed are "+length);
         errorElement.innerHTML = "Max character allowed are "+length;
-      }
+      }      
     }
 
   }
@@ -95,6 +184,8 @@
       }
     }
 
+    console.log('counter', counter);
+
 
     return flag;
 
@@ -105,7 +196,7 @@
 
   /*
    *
-   * Parameter :
+   * Parameter : 
    *  value    : Input string+
    * 
    *  Return   : boolean
@@ -137,15 +228,24 @@
   }
 
 
+  function findUpperCaseWithSmallCodeFunction(value){
+    return value.toLowerCase() != value;
+  }
+
   function passwordValidation(input, errorId){
 
     var errorElement = document.getElementById(errorId);
     errorElement.innerHTML = "";
     
-    console.log('input', input.value);
     if(input.value === ""){
       errorElement.innerHTML = "This field is required";
       return;
+    }    
+
+
+    // Confirm Password Validation
+    if(cPasswordTouched == true){
+      conpass();
     }
 
 
@@ -169,109 +269,288 @@
       errorElement.innerHTML = "Atleast one special character";
       return;
     }
+
+
+    
+    // if(input.value === ""){
+    //   errorElement.innerHTML = "This field is required";
+    // }else if(input.value.length < 8){
+    //   errorElement.innerHTML = "Min character allowed are 8";
+    // }else if(input.value.length > 15){
+    //   errorElement.innerHTML = "Max character allowed are 15";
+    // }  
+
   }
 
 
 
+  /*
+  * Confirm password validation
+  * Matching Password and confirm password
+  */
+  function conpass(){
+
+    cPasswordTouched = true;
+    
+    var errorElement = document.getElementById('cpass');
+    var password     = document.getElementById("Pass-field");
+    var cPassword    = document.getElementById("cpass-field");
+
+    errorElement.innerHTML = "";
+    if(password.value != cPassword.value)
+    {
+      errorElement.innerHTML = "Password not match";
+    }
+  }
+
+  /*function validateMail(mail){
+    console.log('Validate mail called');
+    console.log('Mail value', mail.value );
+
+    var errorElement = document.getElementById('validation-mail');
+    if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail.value)){
+       errorElement.innerHTML = "Invalid Email";
+    }
+    else{
+      errorElement.innerHTML = "Invaild Email";
+    }
+
+  }
+
+  function validatePass(pass){
+    console.log('Validate pass called');
+    console.log('Pass value', pass.value );
+
+    var errorElement = document.getElementById('validation-pass');
+    if(pass.value === ""){
+       errorElement.innerHTML = "This field is required(Password Should be 8-15 character and atleast one uppecase and one special character)";
+    }else{
+      errorElement.innerHTML = "";
+    }
+  }
+
+  function validateCpass(cpass){
+    console.log('Validate cpass called');
+    console.log('Cpass value', cpass.value );
+
+    var errorElement = document.getElementById('validation-cpass');
+    if(cpass.value === ""){
+       errorElement.innerHTML = "Password Not Matched";
+    }else{
+      errorElement.innerHTML = "";
+    }
+  }*/
+
+  function Mail(mail){
+    //var mailformat ="/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/";
+    // if(mai.value !== "mail-format"){
+    //   errorElement.innerHTML = "Invaild Email";
+    //   return false;
+    // }
+  }
+
+
+  /*
+   *
+   *
+   * Function name :  modifiedNumber 
+   * Parmater      : value ( string )
+   * return        : boolean
+    -- True  -- In case all letters are number 
+    -- False -- In case any one letter is not a number
+   */
+
+  function modifiedNumber(value){
+    
+    var allowedCharacter = ["+","-","0","1","2","3","4","5","6","7","8","9"];
+    for(var i=0; i< value.length; i++){
+     if( allowedCharacter.indexOf(value[i]) == -1  ){
+        return false;
+     }
+    }
+
+    return true;
+
+  }
+
+
+  /*
+  *
+  * Check for validation of phone number
+  * Parameter : value ; // String
+  * Return    :
+  *  true  - In case value don't match with "0123456789"
+  *  false - In case value match with "0123456789"
+  */
+
+  function number(value){
+
+
+    var numbers = "0123456789";
+    for(var i= 0; i < value.length; i++){
+      console.log(i);
+      if(value !== numbers){
+        return true;
+      }
+    }
+
+    return false;
+  }
+  
+
+  /*
+  * Mobile validation
+  * Required
+  *Min or max number allowed
+  *charachter are not allowed
+  */
+  function mobile(input, errorId){
+
+    var errorElement = document.getElementById(errorId);
+    errorElement.innerHTML = "";
+    
+    if(input.value === ""){
+      errorElement.innerHTML = "This field is required";
+      return;
+    }    
 
 
 
+
+    if(modifiedNumber(input.value) === false){
+      errorElement.innerHTML = "Only numbers are allowed";
+      return;
+    }
+
+    if(input.value.length < 8){
+      errorElement.innerHTML = "Min Numbers allowed are 8";
+      return;
+    }  
+
+    if(input.value.length > 12){
+      errorElement.innerHTML = "Max Numbers allowed are 12";
+      return;
+    }  
+  }
+  
   </script>
-</head>
-<body>
-  <div class="container"><!--container start-->
-  <div class="row"><!--Row start-->
-  <form class="f1" action="" method="POST"><!--form start-->
-   <h1 class="heading">Create Your Account</h1>
-    <div class="form-group"><!--for name-->
+  </head>
+  <body>
     <div class="row">
-    <div class="col-sm-9">
-      <label class="name"><b>Name</b></label>
-      <input type="text" onkeydown="validateLength(this, 'name', 50,'max');validateRequired(this, 'name');" onchange="validateRequired(this, 'name');" onblur="validateRequired(this, 'name');" id="input-field" name="name" placeholder="Enter Your Name Here..." value=""/>
-      <span id="name"></span>
+    <div class="sm-col-12">
+    <form class="f1" action="" method="POST">
+      <div class="row">
+      <div class="col-sm-6">
+        <label><b>Name</b></label>
+        <input type="text" 
+        onkeyup="validateLength(this, 'name', 10,'max');validateRequired(this, 'name');" 
+        onchange="validateRequired(this, 'name');" 
+        onblur="validateRequired(this, 'name');" 
+        id="input-field" name="name" 
+        placeholder="Enter Your Name Here..." 
+        value=""/>
+        <span id="name"></span>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6">
+        <label><b>Email</b></label>
+        <input type="text" 
+        onkeyup="Mail('this');validateRequired(this, 'email');" 
+        onchange="validateRequired(this, 'email');" 
+        onblur="validateRequired(this, 'email');"  
+        id="email-field" name="email" 
+        placeholder="Enter Your Email Here..." 
+        value=""/>
+        <span id="email"></span>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6">
+        <label><b>Password</b></label>
+        <input type="text" 
+          onkeyup="passwordValidation(this, 'pass');" 
+          onchange="passwordValidation(this, 'pass');" 
+          onblur="passwordValidation(this, 'pass'); " 
+          id="Pass-field" 
+          name="password" 
+          placeholder="********" 
+          value=""/>
+        <span id="pass"></span>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6"> 
+        <label><b>Confirm Password</b></label>
+        <input type="text"  
+        onkeyup="validateRequired(this, 'cpass');conpass();" 
+        onchange="validateRequired(this, 'cpass');conpass();" 
+        onblur="validateRequired(this, 'cpass');conpass();"  
+        id="cpass-field" name="cpassword" 
+        placeholder="********" value=""/>
+        <span id="cpass"></span>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6"> 
+        <label><b>Phone Number:</b></label>
+        <input type="text"  onkeyup="mobile(this, 'mob');" 
+        onchange="mobile(this, 'mob');" 
+        onblur="mobile(this, 'mob');"  
+        id="mob-field" name="mob" 
+        placeholder="Enter Your Mobile number" 
+        value=""/>
+        <span id="mob"></span>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6">
+        <label><b>Gender</b></label>
+        <input 
+        type="radio" 
+        onblur="validateRadioRequired(this, 'gender');" 
+        onchange="validateRadioRequired(this, 'gender');" 
+        id="input-first"
+        name="gender" 
+        value="Male"/>Male
+        <input 
+        type="radio" 
+        onblur="validateRadioRequired(this, 'gender');"    
+        onchange="validateRadioRequired(this, 'gender');"    
+        id="input-second"     
+        name="gender" 
+        value="Female"/>Female
+        <input 
+        type="radio"
+        id="input-third"         
+        onblur="validateRadioRequired(this, 'gender');"         
+        onchange="validateRadioRequired(this, 'gender');"         
+        name="gender" 
+        value="Others"/>Others
+        <span id="gender"></span>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-sm-6">
+        <label><b>Qualification</b></label>
+        <select
+          onkeyup="validateRequired(this, 'qualification-error');" 
+          onchange="validateRequired(this, 'qualification-error');" 
+          onblur="validateRequired(this, 'qualification-error');"  
+        >
+          <option value="">Select</option>
+          <option value="10">10th</option>
+          <option>12th</option>
+          <option>Bachelor</option>
+          <option>Master</option>
+          <option>Phd</option>
+        </select>
+        <span id="qualification-error"></span>
+      </div>
+      </div>
+        <input type="Submit" name="Signup" value="Signup"/>&nbsp&nbsp<a href="Login.php">Login</a>
+    </form>
     </div>
     </div>
-    </div>
-    <div class="form-group"><!--for email-->
-    <div class="row">
-    <div class="col-sm-9">
-      <label class="email"><b>Email</b></label>
-      <input type="text" 
-        onkeydown="//validateRequired(this, 'email');" 
-        onchange="//validateRequired(this, 'email');" 
-        onblur="//validateRequired(this, 'email');"  
-        onkeyup="checkEmail(this)" 
-        id="email-field" name="email" placeholder="Enter Your Email Here..." value=""/>
-      <span id="email"></span>
-    </div>
-    </div>
-    </div>
-    <div class="form-group"><!--for Pass-->
-    <div class="row">
-    <div class="col-sm-9">
-      <label class="pass"><b>Password</b></label>
-      <input type="text" 
-      onkeyup="passwordValidation(this, 'pass');"
-      onchange="passwordValidation(this, 'pass');"
-      onblur="passwordValidation(this, 'pass'); "
-      id="Pass-field"
-      name="password" 
-      placeholder="********" 
-      value=""/>
-      <span id="pass"></span>
-    </div>
-    </div>
-    </div>
-    <div class="form-group"><!--for ConPass-->
-    <div class="row">
-    <div class="col-sm-9"> 
-      <label class="cpass"><b>Confirm Password</b></label>
-      <input type="text"  onkeydown="validateRequired(this, 'cpass');" onchange="validateRequired(this, 'cpass');" onblur="validateRequired(this, 'cpass');"  id="cpass-field" name="cpassword" placeholder="********" value=""/>
-      <span id="cpass"></span>
-    </div>
-    </div>
-    </div>
-    <div class="form-group"><!--for gender-->
-    <div class="row">
-    <div class="col-sm-9">
-             <label class="gender">Gender:</label>
-    </div>
-       
-    <div class="col-xs-4 male">   
-             <input type="radio" name="gender"  id="gender" value="boy">Male</input>
-    </div>
-         
-    <div class="col-xs-4 female">
-      <input type="radio"  name="gender" id="gender" value="girl" >Female</input>
-    </div>
-      
-         </div>
-      <label class="gender"><b>Gender</b></label>
-      <input type="radio" onkeydown="validateRequired(this, 'gender');" onblur="" ="" name="gender" value=""/>Male
-      <input type="radio" name="gender" value=""/>Female
-      <input type="radio" name="gender" value=""/>Others
-      <span id="gender"></span>
-    </div>
-    </div>
-    </div>
-    <div class="form-group"><!--for qualification-->
-    <div class="row">
-    <div class="col-sm-9">
-      <label class="quali"><b>Qualification</b></label>
-      <select>
-        <option>Select</option>
-        <option>10th</option>
-        <option>12th</option>
-        <option>Bachelor</option>
-        <option>Master</option>
-        <option>Phd</option>
-      </select>
-    </div>
-    </div>
-    </div>
-      <input type="Submit" name="Signup" value="Signup"/>&nbsp&nbsp<a href="Login.php">Login</a>
-  </form><!--end form-->
-  </div><!--end row-->
-  </div><!--end container-->
-</body>
-</html>
+  </body>
+  </html>
