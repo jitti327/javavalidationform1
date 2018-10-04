@@ -4,18 +4,19 @@
 -- Add following fields in the form
 
   -- Name
-    -- Max length 50
+    -- Max length 50 - Done
   -- Email
   -- Password
-    -- Not more then 15 character
-    -- Not less then 8 characters
-    -- One Uppercase letter
-    -- Have atleast one special character
+    -- Not more then 15 character - Done
+    -- Not less then 8 characters - Done
+    -- One Uppercase letter - Done
+    -- Have atleast one special character - Done
   -- Confirm Password
-  -- Gender
+    -- Pending
+  -- Gender  -- Required pending
      -- Type radio
      -- Male, Female, Other
-  -- Qualifcation
+  -- Qualifcation -- Required Pending 
      -- Type dropdown
      -- 10th, 12th, Bachelor, Master, Phd
 
