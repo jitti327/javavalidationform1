@@ -15,9 +15,28 @@
       $("#inputEmail").val("asdfasdf");
 
       $('#inputEmail').change(function(){
-        console.log(this);
-        console.log($(this));
-        console.log($(this).val());
+
+        $('#inputHelp').html("");
+
+        // Message
+        $(this).removeClass('is-invalid');
+        $(this).addClass("is-valid");
+
+        //Label
+        $("#label-input").removeClass('text-danger');
+        $("#label-input").addClass("text-success");        
+
+        if( $(this).val() == ""){
+
+          $('#inputHelp').html(" Name is required");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-input").removeClass('text-success');
+          $("#label-input").addClass("text-danger");  
+
+        }
 
       });
 
@@ -33,10 +52,14 @@
   <form id="validation-form">
 
     <div class="form-group row">
-      <label for="inputEmail" class="col-sm-2 col-form-label text-success">Email</label>
+      <label for="inputEmail" id="label-input" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-7">
-        <input type="email" class="form-control is-valid" id="inputEmail" placeholder="Email">
+        <input type="email" class="form-control is-valid" id="inputEmail" placeholder="Email">          
       </div>
+      <div class="col-sm-3">
+        <small id="inputHelp" class="text-danger"></small>      
+      </div>
+
     </div>
 
     <div class="form-group row">
