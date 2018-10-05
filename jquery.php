@@ -12,6 +12,12 @@
 
     });
 
+    $(document).ready(function(){
+
+    }); 
+   
+
+
     window.onload = function(){
       console.log('First on load');
     }
