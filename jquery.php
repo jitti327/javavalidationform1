@@ -14,6 +14,13 @@
       $("#inputEmail").val();
       $("#inputEmail").val("asdfasdf");
 
+      $('#inputEmail').change(function(){
+        console.log(this);
+        console.log($(this));
+        console.log($(this).val());
+
+      });
+
 
     });
   </script>
