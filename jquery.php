@@ -18,13 +18,17 @@
    
 
 
-    window.onload = function(){
-      console.log('First on load');
-    }
+    var i=0;
 
     window.onload = function(){
-      console.log('Second on load');
+      // logic
+      i=2;
     }
+
+
+    console.log(i);
+
+
 
   </script>
 </head>
