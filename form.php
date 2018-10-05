@@ -441,7 +441,6 @@
     
     // Both "@" && "." are present
     if(value.indexOf(".") == -1 || value.indexOf("@") == -1){
-      console.log('we are in this condition');
       return false;
     }
 
@@ -473,7 +472,13 @@
 
 
     // "." is not immediately followed by "@"
-    // if(indexOf("."))
+
+      console.log("Hi condition working before");
+    if(indexOf(".") !== indexOf("@" + 1)){
+      console.log("Hi jatinder its working");
+      return false;
+    }
+
     return true;
 
   }
