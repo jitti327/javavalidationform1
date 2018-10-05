@@ -8,13 +8,77 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
+
     $(document).ready(function(){
       
-      //getter and setter
-      $("#inputEmail").val();
-      $("#inputEmail").val("asdfasdf");
+      // Name required validations
+      $("#inputname").val();
 
-      $('#inputEmail').change(function(){
+      var inputValidationFunction = function(){
+
+        $('#inputNm').html("");
+
+        // Message
+        $(this).removeClass('is-invalid');
+        $(this).addClass("is-valid");
+
+        //Label
+        $("#label-name").removeClass('text-danger');
+        $("#label-name").addClass("text-success");        
+
+        if( $(this).val() == ""){
+
+          $('#inputNm').html(" **Name is required");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-name").removeClass('text-success');
+          $("#label-name").addClass("text-danger"); 
+          return; 
+
+        }        
+
+        if( $(this).val().length < 6){
+
+          $('#inputNm').html(" **Minimum 6 characters are required");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-name").removeClass('text-success');
+          $("#label-name").addClass("text-danger");
+          return;  
+
+        }        
+
+        if( $(this).val().length > 12){
+
+          $('#inputNm').html(" **Maximum 12 characters are allowed");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-name").removeClass('text-success');
+          $("#label-name").addClass("text-danger");
+          return;  
+
+        }
+
+
+      }
+
+      $('#inputname').change(inputValidationFunction);
+
+      $('#inputname').blur(inputValidationFunction);
+
+      $('#inputname').keyup(inputValidationFunction);
+
+
+      // Email required validations
+
+      $("#inputEmail").val();
+      var validationmail = function(){
 
         $('#inputHelp').html("");
 
@@ -28,7 +92,7 @@
 
         if( $(this).val() == ""){
 
-          $('#inputHelp').html(" Name is required");
+          $('#inputHelp').html(" **Email is required");
 
           $(this).removeClass('is-valid');
           $(this).addClass("is-invalid");
@@ -38,18 +102,174 @@
 
         }
 
-      });
+      }
+
+      $('#inputEmail').change(validationmail);
+
+      $('#inputEmail').blur(validationmail);
+
+      $('#inputEmail').keyup(validationmail);
+
+
+      // Password required validations
+
+      $("#inputpass").val();
+
+      var validationpass = function(){
+
+        $('#inputPas').html("");
+
+        // Message
+        $(this).removeClass('is-invalid');
+        $(this).addClass("is-valid");
+
+        //Label
+        $("#label-pass").removeClass('text-danger');
+        $("#label-pass").addClass("text-success");        
+
+        if( $(this).val() == ""){
+
+          $('#inputPas').html(" **Password is required");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-pass").removeClass('text-success');
+          $("#label-pass").addClass("text-danger");  
+          return;
+
+        }        
+
+        if( $(this).val().length < 8){
+
+          $('#inputPas').html(" **At Least 8 characters are allowed");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-pass").removeClass('text-success');
+          $("#label-pass").addClass("text-danger");
+          return;  
+
+        }        
+
+        if( $(this).val().length > 15){
+
+          $('#inputPas').html(" **Maximum 15 characters are allowed");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-pass").removeClass('text-success');
+          $("#label-pass").addClass("text-danger");
+          return;  
+
+        }
+
+      }
+
+      $('#inputpass').change(validationpass);
+
+      $('#inputpass').blur(validationpass);
+
+      $('#inputpass').keyup(validationpass);
+
+
+      // Confirm Password required validations
+      $("#inputcpass").val();
+
+      var validationcpass = function(){
+
+        $('#inputCpas').html("");
+
+        // Message
+        $(this).removeClass('is-invalid');
+        $(this).addClass("is-valid");
+
+        //Label
+        $("#label-cpass").removeClass('text-danger');
+        $("#label-cpass").addClass("text-success");        
+
+        if( $(this).val() == ""){
+
+          $('#inputCpas').html(" **Confirm Password is required");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-cpass").removeClass('text-success');
+          $("#label-cpass").addClass("text-danger");  
+
+        }
+
+      }
+
+      $('#inputcpass').change(validationcpass);
+
+      $('#inputcpass').blur(validationcpass);
+
+      $('#inputcpass').keyup(validationcpass);
+
+
+      // Confirm Password required validations
+      $("#inputnum").val();
+
+      var validationnum = function(){
+
+        $('#inputNum').html("");
+
+        // Message
+        $(this).removeClass('is-invalid');
+        $(this).addClass("is-valid");
+
+        //Label
+        $("#label-num").removeClass('text-danger');
+        $("#label-num").addClass("text-success");        
+
+        if( $(this).val() == ""){
+
+          $('#inputNum').html(" **Phone is required");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-num").removeClass('text-success');
+          $("#label-num").addClass("text-danger");  
+
+        }
+
+      }
+
+      $('#inputnum').change(validationnum);
+
+      $('#inputnum').blur(validationnum);
+
+      $('#inputnum').keyup(validationnum);
 
 
     });
+
+
+
   </script>
 </head>
 <body>
 
 <div class="container">
-  <h2>Stacked form</h2>
+  <h2>Registration form</h2>
 
   <form id="validation-form">
+
+    <div class="form-group row">
+      <label for="inputname" id="label-name" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-7">
+        <input type="name" class="form-control is-valid" id="inputname" placeholder="Enter Your Name Here...">          
+      </div>
+      <div class="col-sm-3">
+        <small id="inputNm" class="text-danger"></small>      
+      </div>
+
+    </div>
 
     <div class="form-group row">
       <label for="inputEmail" id="label-input" class="col-sm-2 col-form-label">Email</label>
@@ -63,46 +283,38 @@
     </div>
 
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label text-danger">Password</label>
+      <label for="inputpass" id="label-pass" class="col-sm-2 col-form-label">Password</label>
       <div class="col-sm-7">
-        <input type="password" class="form-control is-invalid" id="inputPassword" placeholder="Password">
+        <input type="pass" class="form-control is-valid" id="inputpass" placeholder="Enter Your Password Here...">          
       </div>
       <div class="col-sm-3">
-        <small id="passwordHelp" class="text-danger">
-          Must be 8-20 characters long.
-        </small>      
+        <small id="inputPas" class="text-danger"></small>      
       </div>
+
     </div>
 
+    <div class="form-group row">
+      <label for="inputcpass" id="label-cpass" class="col-sm-2 col-form-label">Confirm Password</label>
+      <div class="col-sm-7">
+        <input type="cpass" class="form-control is-valid" id="inputcpass" placeholder="Re-enter Your Password Here...">          
+      </div>
+      <div class="col-sm-3">
+        <small id="inputCpas" class="text-danger"></small>      
+      </div>
 
+    </div>
 
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Email address</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <div class="form-group row">
+      <label for="inputnum" id="label-num" class="col-sm-2 col-form-label">Phone Number</label>
+      <div class="col-sm-7">
+        <input type="number" class="form-control is-valid" id="inputnum" placeholder="Enter Your Phone NumberHere...">          
+      </div>
+      <div class="col-sm-3">
+        <small id="inputNum" class="text-danger"></small>      
+      </div>
+
     </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Example select</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect2">Example multiple select</label>
-      <select multiple class="form-control" id="exampleFormControlSelect2">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1">Example textarea</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
     </div>
   </form>
 </div>
