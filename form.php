@@ -470,27 +470,17 @@
       return false;
   }
 
-
-    // "." is not immediately followed by "@"
-<<<<<<< HEAD
-    if(value.indexOf(".") == value.indexOf("@")+ 1){
-      return false;
-    }
-
     // "." is not immediately before "@"
     if(value.indexOf(".") == value.indexOf("@")- 1){
       return false;
     }
-    // if(indexOf("."))
-=======
 
-      console.log("Hi condition working before");
-    if(indexOf(".") !== indexOf("@" + 1)){
-      console.log("Hi jatinder its working");
+
+    // "." is not immediately followed by "@"
+    if(value.indexOf(".") == value.indexOf("@")+ 1){
       return false;
     }
-
->>>>>>> 0c34a6ea2c662884dbfb5c2bcfd9a9cd823f813a
+    
     return true;
 
   }
