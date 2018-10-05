@@ -245,7 +245,6 @@
       return;
     }    
 
-
     // Confirm Password Validation
     if(cPasswordTouched == true){
       conpass();
@@ -480,7 +479,7 @@
     if(value.indexOf(".") == value.indexOf("@")+ 1){
       return false;
     }
-    
+
     return true;
 
   }
