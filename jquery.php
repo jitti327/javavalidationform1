@@ -9,24 +9,15 @@
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
-
+     console.log('First ready called');
     });
 
     $(document).ready(function(){
-
+     console.log('Second ready called');
     }); 
    
 
 
-    var i=0;
-
-    window.onload = function(){
-      // logic
-      i=2;
-    }
-
-
-    console.log(i);
 
 
 
