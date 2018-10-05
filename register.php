@@ -74,7 +74,7 @@
     errorElement.innerHTML = "";
     
     if(input.value === ""){
-      errorElement.innerHTML = "This field is required";
+      errorElement.innerHTML = "<p color='red'>This field is required";
       return;
     }    
 
@@ -440,6 +440,85 @@
       return;
     }  
   }
+  /*
+   *
+   * Function name :  email
+   * Parmater      : value ( string )
+   * return        : boolean
+    -- True  -- In case first letter is not "@","."
+    -- False -- In case first letter is "@","."
+  */
+  function email(value){
+
+    var allowedCharacter = ["@","."];
+    
+    // Both "@" && "." are present
+    if(value.indexOf(".") == -1 || value.indexOf("@") == -1){
+      return false;
+    }
+
+    // for(var i= 0; i< value.length; i++){
+    //   if(allowedCharacter.indexOf(value.[i]) == -1){
+    //     return false;
+    //   }
+    // }
+
+
+    // First character is not "@","."
+    if(allowedCharacter.indexOf(value[0]) !== -1 ){
+      return false;
+    }
+
+
+    // Last character is not "@","."
+    // console.log(value, value.length -1 , value[ value.length -1 ]);
+    if(allowedCharacter.indexOf(value[ value.length -1 ]) !== -1){
+      return false;
+    }
+
+
+    // "." is followed by "@"
+
+   if(value.indexOf("@") == value.indexOf(".")){
+      return false;
+  }
+
+
+    // "." is not immediately followed by "@"
+    if(value.indexOf(".") == value.indexOf("@")+ 1){
+      return false;
+    }
+
+    // "." is not immediately before "@"
+    if(value.indexOf(".") == value.indexOf("@")- 1){
+      return false;
+    }
+    // if(indexOf("."))
+    return true;
+
+  }
+  
+    //var mailformat ="/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/";
+    // if(mai.value !== "mail-format"){
+    //   errorElement.innerHTML = "Invaild Email";
+    //   return false;
+    // }
+  //}
+
+   function Mail(input, errorId){
+
+    var errorElement = document.getElementById(errorId);
+    errorElement.innerHTML = "";
+    
+    if(input.value === ""){
+      errorElement.innerHTML = "This field is required";
+      return;
+    } 
+    if(email(input.value) === false){
+      errorElement.innerHTML = "Invaild email";
+      return;
+    }
+  }   
   
   </script>
   <style>
@@ -453,7 +532,7 @@
 
       text-align: center;
       background-color: #000000;
-      opacity: 0.6;
+      opacity: 0.75 ;
       width: 500px;
       text-overflow: none;
       text-align: center;
@@ -469,7 +548,7 @@
     <form class="f1" action="" method="POST">
       <div class="form-group">
       <div class="col-sm-6">
-        <label><b>Name</b></label>
+        <label><b style="color: white;">Name</b></label>
         <input type="text" 
         onkeyup="validateRequired(this, 'name');" 
         onchange="validateRequired(this, 'name');" 
@@ -482,11 +561,11 @@
       </div>
       <div class="form-group">
       <div class="col-sm-6">
-        <label><b>Email</b></label>
+        <label><b style="color: white;">Email</b></label>
         <input type="text" 
-        onkeyup="Mail('this');validateRequired(this, 'email');" 
-        onchange="validateRequired(this, 'email');" 
-        onblur="validateRequired(this, 'email');"  
+        onkeyup="Mail(this, 'email');" 
+        onchange="Mail(this, 'email');" 
+        onblur="Mail(this, 'email');"  
         id="email-field" name="email" 
         placeholder="Enter Your Email Here..." 
         value=""/>
@@ -495,7 +574,7 @@
     	</div>
       <div class="form-group">
       <div class="col-sm-6">
-        <label><b>Password</b></label>
+        <label><b style="color: white;">Password</b></label>
         <input type="text" 
           onkeyup="passwordValidation(this, 'pass');" 
           onchange="passwordValidation(this, 'pass');" 
@@ -509,7 +588,7 @@
     	</div>
       <div class="form-group">
       <div class="col-sm-6"> 
-        <label><b>Confirm Password</b></label>
+        <label><b style="color: white;">Confirm Password</b></label>
         <input type="text"  
         onkeyup="validateRequired(this, 'cpass');conpass();" 
         onchange="validateRequired(this, 'cpass');conpass();" 
@@ -521,7 +600,7 @@
       </div>
       <div class="form-group">
       <div class="col-sm-6"> 
-        <label><b>Phone Number:</b></label>
+        <label><b style="color: white;">Phone Number:</b></label>
         <input type="text"  onkeyup="mobile(this, 'mob');" 
         onchange="mobile(this, 'mob');" 
         onblur="mobile(this, 'mob');"  
@@ -533,34 +612,34 @@
       </div>
       <div class="form-group">
       <div class="col-sm-6">
-        <label><b>Gender</b></label>
+        <label><b style="color: white;">Gender</b></label>
         <input 
         type="radio" 
         onblur="validateRadioRequired(this, 'gender');" 
         onchange="validateRadioRequired(this, 'gender');" 
         id="input-first"
         name="gender" 
-        value="Male"/>Male
+        value="Male"/><b style="color: white;">Male</b>
         <input 
         type="radio" 
         onblur="validateRadioRequired(this, 'gender');"    
         onchange="validateRadioRequired(this, 'gender');"    
         id="input-second"     
         name="gender" 
-        value="Female"/>Female
+        value="Female"/><b style="color: white;">Female</b>
         <input 
         type="radio"
         id="input-third"         
         onblur="validateRadioRequired(this, 'gender');"         
         onchange="validateRadioRequired(this, 'gender');"         
         name="gender" 
-        value="Others"/>Others
+        value="Others"/><b style="color: white;">Others</b>
         <span id="gender"></span>
       </div>
       </div>
       <div class="form-group">
       <div class="col-sm-6">
-        <label><b>Qualification</b></label>
+        <label><b style="color: white;">Qualification</b></label>
         <select
           onkeyup="validateRequired(this, 'qualification-error');" 
           onchange="validateRequired(this, 'qualification-error');" 

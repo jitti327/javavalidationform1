@@ -441,7 +441,6 @@
     
     // Both "@" && "." are present
     if(value.indexOf(".") == -1 || value.indexOf("@") == -1){
-      console.log('we are in this condition');
       return false;
     }
 
@@ -467,12 +466,20 @@
 
     // "." is followed by "@"
 
-   if(value.indexOf("@") > value.indexOf(".")){
+   if(value.indexOf("@") == value.indexOf(".")){
       return false;
   }
 
 
     // "." is not immediately followed by "@"
+    if(value.indexOf(".") == value.indexOf("@")+ 1){
+      return false;
+    }
+
+    // "." is not immediately before "@"
+    if(value.indexOf(".") == value.indexOf("@")- 1){
+      return false;
+    }
     // if(indexOf("."))
     return true;
 
@@ -510,8 +517,8 @@
         <label><b>Name</b></label>
         <input type="text" 
         onkeyup="validateLength(this, 'name', 10,'max');validateRequired(this, 'name');" 
-        onchange="validateRequired(this, 'name');" 
-        onblur="validateRequired(this, 'name');" 
+        onchange="validateLength(this, 'name', 10,'max');validateRequired(this, 'name');" 
+        onblur="validateLength(this, 'name', 10,'max');validateRequired(this, 'name');" 
         id="input-field" name="name" 
         placeholder="Enter Your Name Here..." 
         value=""/>
@@ -522,9 +529,9 @@
       <div class="col-sm-6">
         <label><b>Email</b></label>
         <input type="text" 
-        onkeyup="Mail(this, 'email')" 
-        onchange="validateRequired(this, 'email');" 
-        onblur="validateRequired(this, 'email');"  
+        onkeyup="Mail(this, 'email');" 
+        onchange="Mail(this, 'email');" 
+        onblur="Mail(this, 'email');"  
         id="email-field" name="email" 
         placeholder="Enter Your Email Here..." 
         value=""/>
