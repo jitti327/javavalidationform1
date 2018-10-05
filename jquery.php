@@ -9,18 +9,13 @@
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
-     console.log('First ready called');
+      
+      //getter and setter
+      $("#inputEmail").val();
+      $("#inputEmail").val("asdfasdf");
+
+
     });
-
-    $(document).ready(function(){
-     console.log('Second ready called');
-    }); 
-   
-
-
-
-
-
   </script>
 </head>
 <body>
