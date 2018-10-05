@@ -63,7 +63,30 @@
           $("#label-name").addClass("text-danger");
           return;  
 
+
         }
+
+
+       var Characters = "~!@#$%^&*()_+{}:|<>?";
+
+       for(var i= 0 ; i < $(this).val().length; i++){
+
+       console.log("var");
+
+      //if(Characters.indexOf(val[i] == -1){
+      if(Characters.indexOf($(this).val()[i]) == -1){
+        console.log("here we are");
+
+          $('#inputNm').html(" **Only characters are allowed");
+
+          $(this).removeClass('is-valid');
+          $(this).addClass("is-invalid");
+
+          $("#label-name").removeClass('text-success');
+          $("#label-name").addClass("text-danger");
+          return; 
+      }
+    }
 
 
       }
